@@ -1,58 +1,19 @@
 <html>
 
 <head>
-	<script src="//ej2.syncfusion.com/javascript/demos/schedule/resource-grouping/datasource.js" type="text/javascript">
-	</script>
-	<script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript">
-	</script>
-	<link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
-
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-	<style>
-		body {
-			touch-action: none;
-		}
-	</style>
-</head>
-
-<body>
-	<div class="stackblitz-container material">
-		<div class="col-lg-12 control-section">
-			<div class="content-wrapper"><br>
-        <div id="Schedule"></div>
-    </div>
-</div>
-
-
-
-
-
-<script id="restemplate" type="text/x-template">
-    <div class='template-wrap'>
-        <div class="airline-details">
-            <div class="airline-name">${getAirlineName(data)}</div>
-            <div class="airline-seats"><div id="${getAirlineTime(data)}" style="padding-top: 6px;"> </div></div>
-        </div>
-    </div>
-</script>
-
-<html>
-
-<head>    
   <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-polyfills/0.1.42/polyfill.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-polyfills/0.1.42/polyfill.min.js"></script>
   <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="col-lg-12 control-section">
+  <div class="col-lg-12 control-section">
     <div class="content-wrapper"><br>
-        <div id="Schedule"></div>
+      <div id="Schedule"></div>
     </div>
-</div>
-		<script id="restemplate" type="text/x-template">
+  </div>
+  <script id="restemplate" type="text/x-template">
     <div class='template-wrap'>
         <div class="airline-details">
             <div class="airline-name">${getAirlineName(data)}</div>
@@ -60,106 +21,103 @@
         </div>
     </div>
 </script>
-<style>
+  <style>
     .e-schedule .template-wrap {
-        display: flex;
-        text-align: left;
+      display: flex;
+      text-align: left;
     }
 
     .e-schedule .e-vertical-view .e-resource-cells {
-        height: 76px;
+      height: 76px;
     }
 
     .e-bigger .e-schedule .e-vertical-view .e-resource-cells {
-        height: 80px;
+      height: 80px;
     }
 
     .e-schedule .template-wrap .airline-details {
-        padding-left: 15px;
+      padding-left: 15px;
     }
 
     .e-schedule .e-agenda-view .template-wrap .airline-details {
-        padding: 0;
+      padding: 0;
     }
 
     .e-schedule .template-wrap .airline-details .airline-name {
-        font-size: 16px;
-        font-weight: 500;
+      font-size: 16px;
+      font-weight: 500;
     }
 
     .e-schedule.e-device .template-wrap .airline-details .airline-name {
-        font-size: inherit;
-        font-weight: inherit;
+      font-size: inherit;
+      font-weight: inherit;
     }
-
-</style>
-        <script type="text/javascript">
-           var scheduleObj = new ej.schedule.Schedule({
-  width: '100%',
-  height: '550px',
-  selectedDate: new Date(2018, 1, 15),
-   views: ['Day', 'Week', 'WorkWeek', 'Month'],
-  resourceHeaderTemplate: '#restemplate',
-  group: {
-    resources: ['Airlines']
-  },
-  resources: [{
-    field: 'AirlineId', title: 'Airline Name',
-    name: 'Airlines', allowMultiple: true,
-    dataSource: [
-      { AirlineName: 'Airways 1', AirlineId: 1, AirlineColor: '#EA7A57' },
-      { AirlineName: 'Airways 2', AirlineId: 2, AirlineColor: '#357cd2' },
-      { AirlineName: 'Airways 3', AirlineId: 3, AirlineColor: '#7fa900' }
-    ],
-    textField: 'AirlineName', idField: 'AirlineId', colorField: 'AirlineColor'
-  }],
-  eventSettings: {
-    dataSource: [{
-      Id: 1,
-      Subject: 'Meeting',
-      StartTime: new Date(2018, 1, 15, 10, 0),
-      EndTime: new Date(2018, 1, 15, 12, 30),
-      AirlineId: 1
-    }]
-  },
-  eventRendered: function (args) {
-    let totalEvents = this.eventsData;
-    var dm = new ej.data.DataManager({ json: totalEvents });
-    let resources = this.resources[0].dataSource;
-    resources.forEach(function (resource) {
-      var hours = 0;
-      var datasource = dm.executeLocal(
-        new ej.data.Query().where("AirlineId", "equal", resource.AirlineId)
-      );
-      debugger
-      datasource.forEach(function (data) {
-        hours += Math.abs(data.EndTime - data.StartTime) / 36e5;
-      });
-      document.getElementById(resource.AirlineId).innerHTML = hours + " Hours";
+  </style>
+  <script type="text/javascript">
+    var scheduleObj = new ej.schedule.Schedule({
+      width: '100%',
+      height: '550px',
+      selectedDate: new Date(2018, 1, 15),
+      views: ['Day', 'Week', 'WorkWeek', 'Month'],
+      resourceHeaderTemplate: '#restemplate',
+      group: {
+        resources: ['Airlines']
+      },
+      resources: [{
+        field: 'AirlineId', title: 'Airline Name',
+        name: 'Airlines', allowMultiple: true,
+        dataSource: [
+          { AirlineName: 'Airways 1', AirlineId: 1, AirlineColor: '#EA7A57' },
+          { AirlineName: 'Airways 2', AirlineId: 2, AirlineColor: '#357cd2' },
+          { AirlineName: 'Airways 3', AirlineId: 3, AirlineColor: '#7fa900' }
+        ],
+        textField: 'AirlineName', idField: 'AirlineId', colorField: 'AirlineColor'
+      }],
+      eventSettings: {
+        dataSource: [{
+          Id: 1,
+          Subject: 'Meeting',
+          StartTime: new Date(2018, 1, 15, 10, 0),
+          EndTime: new Date(2018, 1, 15, 12, 30),
+          AirlineId: 1
+        }]
+      },
+      eventRendered: function (args) {
+        let totalEvents = this.eventsData;
+        var dm = new ej.data.DataManager({ json: totalEvents });
+        let resources = this.resources[0].dataSource;
+        resources.forEach(function (resource) {
+          var hours = 0;
+          var datasource = dm.executeLocal(
+            new ej.data.Query().where("AirlineId", "equal", resource.AirlineId)
+          );
+          debugger
+          datasource.forEach(function (data) {
+            hours += Math.abs(data.EndTime - data.StartTime) / 36e5;
+          });
+          document.getElementById(resource.AirlineId).innerHTML = hours + " Hours";
+        });
+      },
+      dataBinding: function (args) {
+        if (args.result.length == 0) {
+          let resources = this.resources[0].dataSource;
+          resources.forEach(function (resource) {
+            document.getElementById(resource.AirlineId).innerHTML = 0 + " Hours";
+          });
+        }
+      }
     });
-  },
-  dataBinding: function (args) {
-    if (args.result.length == 0) {
-      let resources = this.resources[0].dataSource;
-      resources.forEach(function (resource) {
-        document.getElementById(resource.AirlineId).innerHTML = 0 + " Hours";
-      });
-    }
-  }
-});
-scheduleObj.appendTo('#Schedule');
+    scheduleObj.appendTo('#Schedule');
 
 
-window.getAirlineName = function (value) {
-  return (value.resourceData) ? value.resourceData[value.resource.textField] : value.resourceName;
-};
-window.getAirlineTime = function (data) {
-  let value = JSON.parse(JSON.stringify(data));
-  return value.resourceData.AirlineId;
-};
-        </script>
-
-    </div>
+    window.getAirlineName = function (value) {
+      return (value.resourceData) ? value.resourceData[value.resource.textField] : value.resourceName;
+    };
+    window.getAirlineTime = function (data) {
+      let value = JSON.parse(JSON.stringify(data));
+      return value.resourceData.AirlineId;
+    };
+  </script>
 </body>
 
-</html></div></body></html>
+</html>
